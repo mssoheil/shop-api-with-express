@@ -33,7 +33,7 @@ async function authenticateUser(email: string, password: string, done: Done) {
 
 export function initialize(passport: PassportStatic) {
 	passport.use(
-		"user-local",
+		"local",
 		new LocalStrategy(
 			{
 				usernameField: "email",
@@ -41,6 +41,6 @@ export function initialize(passport: PassportStatic) {
 			authenticateUser,
 		),
 	);
-	// passport.serializeUser((user, done) => {});
-	// passport.deserializeUser((user, done) => {});
+	// passport.serializeUser((user, done) => {done(null, user.id)});
+	// passport.deserializeUser((id, done) => {done(null, getUserById(id))});
 }

@@ -1,16 +1,28 @@
-<% if (message.error) { %> <%= messages.error %> <% } %>
-<body>
-	<h1>Login</h1>
-	<form method="post" action="/auth/login">
-		<div class="form-item">
-			<label>Email</label>
-			<input type="email" name="email" />
-		</div>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/index.css" />
+		<link rel="stylesheet" href="/styles/login.css" />
+		<title>Login</title>
+	</head>
+	<body>
+		<% if (messages?.error) { %> <%= messages?.error %> <% } %>
 
-		<div class="form-item">
-			<label>Password</label>
-			<input type="password" name="password" />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
-</body>
+		<h1>Login</h1>
+		<form method="post" action="/auth/login">
+			<div class="form-item">
+				<label>Email</label>
+				<input type="email" name="email" />
+			</div>
+
+			<div class="form-item">
+				<label>Password</label>
+				<input type="password" name="password" />
+			</div>
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

@@ -1,3 +1,15 @@
+body {
+	padding: 20px;
+}
+
+form {
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 100px;
+}
+
 .form-item {
 	margin-bottom: 20px;
 }
@@ -7,10 +19,23 @@ label {
 	display: inline-block;
 	font-size: 20px;
 	font-weight: 600;
-	color: #333;
+	color: #444;
 }
 
 input {
 	border-radius: 4px;
 	height: 30px;
+}
+
+button {
+	width: 200px;
+	margin: 0 auto;
+	margin-top: 50px;
+	border-color: rgb(100, 100, 237);
+	border-radius: 10px;
+	font-size: 20px;
+	color: #444;
+	font-weight: 600;
+	padding: 10px 20px;
+	cursor: pointer;
 }

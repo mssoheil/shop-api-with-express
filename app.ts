@@ -1,17 +1,18 @@
-import dotenv from "dotenv";
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv").config();
+}
 
-import express from "express";
+import createServer from "./utils/server";
 import chalk from "chalk";
+
+import passport from "passport";
+import { initialize } from "./utils/passportConfig";
 // Routes
 import authRoute from "./routes/auth";
 
-dotenv.config();
+initialize(passport);
 
-const app = express();
-
-app.set("view-engin", "ejs");
-
-app.use(express.static("public"));
+const app = createServer();
 
 app.get("/", (req, res) => {
 	res.redirect("/auth/login");
@@ -28,6 +29,7 @@ app.get("/register", (req, res) => {
 });
 
 const port = process.env.PORT;
+
 app.listen(process.env.PORT, () => {
 	console.log(chalk.cyan(`listening on port ${port}...`));
 });

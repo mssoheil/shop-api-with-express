@@ -1,5 +1,5 @@
 # shop-api-with-express
-### It's a TDD app
+### It's mostly an app with TDD approach
 
 ### The basic user can login/register to app
 ### The admin user can login to app

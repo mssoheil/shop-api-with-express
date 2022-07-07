@@ -12,14 +12,17 @@ interface IVerifyOptions {
 type Done = (error: any, user?: any, options?: IVerifyOptions) => void;
 
 async function authenticateUser(email: string, password: string, done: Done) {
+	console.log("DEBUG -> authenticateUser -> password", password);
+	console.log("DEBUG -> authenticateUser -> email", email);
 	const users: User[] = await getUsers();
 	const user = findByKey(users, "email", email);
 	if (!user) {
 		done(null, false, { message: "no user with that email found" });
+		return;
 	}
 
 	try {
-		const passwordIsCorrect = await bcrypt.compare(password, user.password);
+		const passwordIsCorrect = await bcrypt.compare(password, user?.password);
 		if (!passwordIsCorrect) {
 			done(null, false, { message: "password is incorrect" });
 			// password incorect

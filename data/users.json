@@ -1,6 +1,1 @@
-[
-  {
-    "email": "mool@mool.com",
-    "password": "mool"
-  }
-]
+[{"email":"mool@mool.com","password":"mool"},{"id":"dbf20658-92a0-407a-9b34-752f8f75f432","email":"mool88@mool88.com","password":"$2b$10$WElPBCP2R0YoNMz4jEHa/Ot1NWn7PeOWasv63kY8hs.Gdy4cIOCKS","role":"BASIC"},{"id":"65f3fd6c-e477-4448-947d-b925bdb97f37","email":"mool8888@mool8888.com","password":"$2b$10$Yv5f5.2XHvbb4SUlmFsYCeFbBz.FklT9Y8Cqsf106FDyNyIhM55tS","role":"BASIC"}]

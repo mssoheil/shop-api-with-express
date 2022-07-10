@@ -9,8 +9,15 @@ import passport from "passport";
 import { initialize } from "./utils/passportConfig";
 // Routes
 import authRoute from "./routes/auth";
+import { getUserById, getUsers } from "./utils/getSetUsers";
 
-initialize(passport);
+async function handleGetById(id: string) {
+	const users = await getUsers();
+	const user = await getUserById(users, id);
+	return user;
+}
+
+initialize(passport, handleGetById);
 
 const app = createServer();
 
@@ -21,7 +28,8 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoute);
 
 app.get("/dashboard", (req, res) => {
-	res.render("dashboard.ejs");
+	// @ts-ignore
+	res.render("dashboard.ejs", { email: req.user.email });
 });
 
 app.get("/register", (req, res) => {

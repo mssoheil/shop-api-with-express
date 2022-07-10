@@ -9,10 +9,16 @@ router.get("/", (req, res) => {
 router.post(
 	"/",
 	passport.authenticate("local", {
-		successRedirect: "/dashboard",
 		failureRedirect: "/auth/login",
 		failureFlash: true,
 	}),
+	(req, res) => {
+		// @ts-ignore
+		req.email = req.email || "moolan";
+		// @ts-ignore
+		res.email = res.email || "moolan";
+		res.redirect("/dashboard");
+	},
 );
 
 export default router;

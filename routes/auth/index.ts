@@ -1,6 +1,8 @@
 import express from "express";
+// Routes
 import loginRoute from "./login";
 import registerRoute from "./register";
+
 const router = express.Router();
 
 router.use("/login", loginRoute);

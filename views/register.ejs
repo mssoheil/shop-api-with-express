@@ -9,8 +9,9 @@
 		<title>Register</title>
 	</head>
 	<body>
+		<% if (messages?.error) { %> <%= messages?.error %> <% } %>
 		<h1>Register</h1>
-		<form method="post" action="/auth/login">
+		<form method="post" action="/auth/register">
 			<div class="form-item">
 				<label>Email</label>
 				<input type="email" name="email" />

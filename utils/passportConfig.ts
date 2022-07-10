@@ -2,8 +2,9 @@ import { PassportStatic } from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import { findByKey } from "./findBykey";
-import { getUsers } from "./getUsers";
-import { User } from "../types/user";
+import { getUsers } from "./getSetUsers";
+// Types
+import type { User } from "../types/user";
 
 interface IVerifyOptions {
 	message: string;
@@ -12,8 +13,6 @@ interface IVerifyOptions {
 type Done = (error: any, user?: any, options?: IVerifyOptions) => void;
 
 async function authenticateUser(email: string, password: string, done: Done) {
-	console.log("DEBUG -> authenticateUser -> password", password);
-	console.log("DEBUG -> authenticateUser -> email", email);
 	const users: User[] = await getUsers();
 	const user = findByKey(users, "email", email);
 	if (!user) {
@@ -34,7 +33,7 @@ async function authenticateUser(email: string, password: string, done: Done) {
 	}
 }
 
-export function initialize(passport: PassportStatic) {
+export function initialize(passport: PassportStatic, getById: any) {
 	passport.use(
 		"local",
 		new LocalStrategy(
@@ -44,6 +43,14 @@ export function initialize(passport: PassportStatic) {
 			authenticateUser,
 		),
 	);
-	// passport.serializeUser((user, done) => {done(null, user.id)});
-	// passport.deserializeUser((id, done) => {done(null, getUserById(id))});
+	passport.serializeUser((user: any, done) => {
+		console.log("DEBUG -> passport.serializeUser -> user", user);
+		done(null, user.id);
+	});
+	passport.deserializeUser(async (id, done) => {
+		console.log("DEBUG -> passport.deserializeUser -> id", id);
+		const foundUser = await getById(id);
+		console.log("DEBUG -> passport.deserializeUser -> foundUser", foundUser);
+		return done(null, foundUser);
+	});
 }

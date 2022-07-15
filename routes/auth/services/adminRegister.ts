@@ -5,7 +5,7 @@ import { handleBadRequest, handleConflict, handleCreateUser } from "./services.u
 import type { Request, Response } from "express";
 import type { User } from "../../../types/user";
 
-export async function registerUser(req: Request, res: Response) {
+export async function registerAdminUser(req: Request, res: Response) {
 	try {
 		const { body } = req;
 		if (!body.email || !body.password) {
@@ -17,7 +17,7 @@ export async function registerUser(req: Request, res: Response) {
 			handleConflict(req, res);
 		}
 
-		handleCreateUser(req, res, users, "BASIC");
+		handleCreateUser(req, res, users, "ADMIN");
 	} catch (error) {
 		console.log("DEBUG -> router.post -> error", error);
 	}

@@ -11,4 +11,8 @@ router.post("/", (req, res) => {
 	registerUser(req, res);
 });
 
+router.post("/", (req, res) => {
+	registerUser(req, res);
+});
+
 export default router;

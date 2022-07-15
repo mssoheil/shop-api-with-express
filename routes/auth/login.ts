@@ -12,11 +12,7 @@ router.post(
 		failureRedirect: "/auth/login",
 		failureFlash: true,
 	}),
-	(req, res) => {
-		// @ts-ignore
-		req.email = req.email || "moolan";
-		// @ts-ignore
-		res.email = res.email || "moolan";
+	(_, res) => {
 		res.redirect("/dashboard");
 	},
 );

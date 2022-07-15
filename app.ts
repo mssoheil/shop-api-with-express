@@ -29,11 +29,23 @@ app.use("/auth", authRoute);
 
 app.get("/dashboard", (req, res) => {
 	// @ts-ignore
-	res.render("dashboard.ejs", { email: req.user.email });
+	if (!req?.user?.email) {
+		return res.redirect("/auth/login");
+	}
+	// @ts-ignore
+	res.render("dashboard.ejs", { email: req.user.email, role: req.user.role });
 });
 
-app.get("/register", (req, res) => {
-	res.render("register.ejs");
+app.post("/logout", (req, res) => {
+	req.logOut(
+		{
+			keepSessionInfo: false,
+		},
+		(error: any) => {
+			console.log("DEBUG -> app.post -> error", error);
+		},
+	);
+	res.redirect("/auth/login");
 });
 
 const port = process.env.PORT;

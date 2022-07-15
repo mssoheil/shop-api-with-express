@@ -1,5 +1,6 @@
 # shop-api-with-express
 ### Some apis has been written with TDD approach and others has tests
+### Has very simple ui
 
 ### The basic user can login/register to app
 ### The admin user can login to app

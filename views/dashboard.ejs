@@ -10,6 +10,11 @@
 	</head>
 	<body>
 		<h1>dashboard</h1>
-		<h3 class="heading">Hello <span class="email"> <%= email %> </span></h3>
+		<h3 class="heading">
+			Hello <span class="email"> <%= email %> <%= role === "ADMIN" ? "ADMIN" : null %> </span>
+		</h3>
+		<form action="/logout" method="POST">
+			<button type="submit">Log out</button>
+		</form>
 	</body>
 </html>

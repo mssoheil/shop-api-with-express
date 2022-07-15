@@ -44,13 +44,10 @@ export function initialize(passport: PassportStatic, getById: any) {
 		),
 	);
 	passport.serializeUser((user: any, done) => {
-		console.log("DEBUG -> passport.serializeUser -> user", user);
 		done(null, user.id);
 	});
 	passport.deserializeUser(async (id, done) => {
-		console.log("DEBUG -> passport.deserializeUser -> id", id);
 		const foundUser = await getById(id);
-		console.log("DEBUG -> passport.deserializeUser -> foundUser", foundUser);
 		return done(null, foundUser);
 	});
 }

@@ -13,14 +13,14 @@ interface IVerifyOptions {
 type Done = (error: any, user?: any, options?: IVerifyOptions) => void;
 
 async function authenticateUser(email: string, password: string, done: Done) {
-	const users: User[] = await getUsers();
-	const user = findByKey(users, "email", email);
-	if (!user) {
-		done(null, false, { message: "no user with that email found" });
-		return;
-	}
-
 	try {
+		const users: User[] = await getUsers();
+		const user = findByKey(users, "email", email);
+		if (!user) {
+			done(null, false, { message: "no user with that email found" });
+			return;
+		}
+
 		const passwordIsCorrect = await bcrypt.compare(password, user?.password);
 		if (!passwordIsCorrect) {
 			done(null, false, { message: "password is incorrect" });
@@ -29,7 +29,7 @@ async function authenticateUser(email: string, password: string, done: Done) {
 		}
 		done(null, user);
 	} catch (error) {
-		done(error);
+		done("error happened in the server");
 	}
 }
 

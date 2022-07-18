@@ -7,17 +7,16 @@
 		<link rel="stylesheet" href="/styles/index.css" />
 		<link rel="stylesheet" href="/styles/dashboard.css" />
 		<title>Document</title>
+		<script>
+			function handleClick() {
+				console.log("HDLFDLF");
+			}
+		</script>
 	</head>
 	<body>
-		<h1>dashboard</h1>
+		<h1>Item list</h1>
 		<h3 class="heading">
 			Hello <span class="email"> <%= email %> <%= role === "ADMIN" ? "ADMIN" : null %> </span>
 		</h3>
-		<a href="/dashboard/edit-item">edit items</a>
-
-		<br />
-		<form action="/logout" method="POST">
-			<button type="submit">Log out</button>
-		</form>
 	</body>
 </html>

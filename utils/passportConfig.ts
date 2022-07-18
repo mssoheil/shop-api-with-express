@@ -29,6 +29,7 @@ async function authenticateUser(email: string, password: string, done: Done) {
 		}
 		done(null, user);
 	} catch (error) {
+		console.log("DEBUG -> authenticateUser -> error", error);
 		done("error happened in the server");
 	}
 }

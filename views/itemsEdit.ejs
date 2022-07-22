@@ -6,10 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/styles/index.css" />
 		<link rel="stylesheet" href="/styles/dashboard.css" />
+		<link rel="stylesheet" href="/styles/items.css" />
 		<title>Document</title>
 		<script>
-			function handleClick() {
-				console.log("HDLFDLF");
+			function handleEditItem(element) {
+				console.log("DEBUG -> handleEditItem -> id", element.dataset.id);
 			}
 		</script>
 	</head>
@@ -18,5 +19,33 @@
 		<h3 class="heading">
 			Hello <span class="email"> <%= email %> <%= role === "ADMIN" ? "ADMIN" : null %> </span>
 		</h3>
+
+		<%- include("partials/logout.ejs") %>
+		<form action="items" method="post">
+			<label>Name</label>
+			<input name="name" />
+			<label>Description</label>
+			<input name="description" />
+			<label>Price</label>
+			<input name="price" />
+			<button type="submit">Submit</button>
+		</form>
+		<% if (Array.isArray(locals.items)) { %>
+		<h4>List of items</h4>
+		<div class="items">
+			<% items.forEach(item => { %>
+			<div class="item">
+				<h5>Name</h5>
+				<div><%= item.name %></div>
+				<h5>Description</h5>
+				<%= item.description %>
+				<h5>Price</h5>
+				<%= item.price %>
+				<br />
+				<button onclick="handleEditItem(this)" data-id="<%= item.id %>">Edit</button>
+			</div>
+			<% }) %>
+		</div>
+		<% } %>
 	</body>
 </html>

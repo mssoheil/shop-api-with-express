@@ -24,7 +24,6 @@ async function authenticateUser(email: string, password: string, done: Done) {
 		const passwordIsCorrect = await bcrypt.compare(password, user?.password);
 		if (!passwordIsCorrect) {
 			done(null, false, { message: "password is incorrect" });
-			// password incorect
 			return;
 		}
 		done(null, user);

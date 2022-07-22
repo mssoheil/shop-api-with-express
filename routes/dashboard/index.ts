@@ -1,23 +1,24 @@
 import express from "express";
+// Utils
+import { getEmailAndRoleFromRequest } from "../../utils";
+import { checkLoggedIn } from "../../utils/authentication";
+import { getItems } from "../../utils/items";
+// Routes
+import itemsRoute from "./routes/items";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", checkLoggedIn, (req, res) => {
 	// @ts-ignore
-	if (!req?.user?.email) {
-		return res.redirect("/auth/login");
-	}
-	// @ts-ignore
-	res.render("dashboard.ejs", { email: req.user.email, role: req.user.role });
+	res.render("dashboard.ejs", getEmailAndRoleFromRequest(req));
 });
 
-router.get("/edit-item", (req, res) => {
+router.get("/edit-item", checkLoggedIn, async (req, res) => {
+	let items = await getItems();
 	// @ts-ignore
-	if (!req?.user?.email) {
-		return res.redirect("/auth/login");
-	}
-	// @ts-ignore
-	res.render("itemsEdit.ejs", { email: req.user.email, role: req.user.role });
+	res.render("itemsEdit.ejs", { ...getEmailAndRoleFromRequest(req), items });
 });
+
+router.use("/items", checkLoggedIn, itemsRoute);
 
 export default router;

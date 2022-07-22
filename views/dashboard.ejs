@@ -10,14 +10,10 @@
 	</head>
 	<body>
 		<h1>dashboard</h1>
-		<h3 class="heading">
-			Hello <span class="email"> <%= email %> <%= role === "ADMIN" ? "ADMIN" : null %> </span>
-		</h3>
-		<a href="/dashboard/edit-item">edit items</a>
+		<h3 class="heading">Hello <span class="email"> <%= email %> <% role === "ADMIN" ? "ADMIN" : null %> </span></h3>
+		<%- include("partials/logout.ejs") %> <% if (role === "ADMIN") { %>
 
-		<br />
-		<form action="/logout" method="POST">
-			<button type="submit">Log out</button>
-		</form>
+		<a href="/dashboard/edit-item">edit items</a>
+		<% } %>
 	</body>
 </html>
